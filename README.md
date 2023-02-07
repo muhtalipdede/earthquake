@@ -33,3 +33,4 @@ This project is licensed under the [MIT License](LICENSE).
 ## Screenshots
 
 <img src="./images/screenshot.png" alt="Earthquake" />
+<img src="./images/screenshot2.png" alt="Earthquake" />

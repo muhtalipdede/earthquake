@@ -1,49 +1,107 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import folium
 import folium.plugins as plugins
 import pandas as pd
 import xml.etree.ElementTree as ET
 import requests
 import plotly.express as px
+from datetime import datetime, timedelta
 
-app = Flask(__name__, template_folder='template')
+app = Flask(__name__, template_folder='template', static_folder='static')
 
-def get_maps():
-    r = requests.get('http://udim.koeri.boun.edu.tr/zeqmap/xmlt/son24saat.xml')
-    root = ET.fromstring(r.content)
+def fetch_afad_data():
+    url = "https://deprem.afad.gov.tr/EventData/GetEventsByFilter"
+
+    last = datetime.now() - timedelta(hours=240)
+    now = datetime.now()
+
+    request_payload = {
+        "EventSearchFilterList": [
+            {
+                "FilterType": 1,
+                "Value": "22.4502"
+            },
+            {
+                "FilterType": 2,
+                "Value": "52.7088"
+            },
+            {
+                "FilterType": 3,
+                "Value": "24.7742"
+            },
+            {
+                "FilterType": 4,
+                "Value": "47.6258"
+            },
+            {
+                "FilterType": 8,
+                "Value": last.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+            },
+            {
+                "FilterType": 9,
+                "Value": now.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+            }
+        ],
+        "Skip": 0,
+        "Take": 1000,
+        "SortDescriptor": {
+            "field": "eventDate",
+            "dir": "desc"
+        }
+    }
+    response = requests.post(url, json=request_payload)
+    response_data = response.json()["eventList"]
+
     data = []
-    
-    for child in root.iter('*'):
-        if (child.tag == "earhquake"):
-            date = child.items()[0][1]
-            address = child.items()[1][1]
-            magnitude = float(child.items()[4][1])
-            latitude = float(child.items()[2][1])
-            longitude = float(child.items()[3][1])
-            dept = -float(child.items()[5][1])
-            data.append([magnitude, latitude, longitude, date, address, dept])
-    
-    df = pd.DataFrame(data, columns=['magnitude', 'latitude', 'longitude', 'date', 'address', 'dept'])
-    df = df.sort_values('date', ascending=False)
 
-    magnitude_map = folium.Map(location=[df['latitude'].mean(), df['longitude'].mean()], zoom_start=7)
+    for earthquake in response_data:
+        date = earthquake["eventDate"]
+        address = earthquake["location"]
+        magnitude = float(earthquake["magnitude"])
+        latitude = float(earthquake["latitude"])
+        longitude = float(earthquake["longitude"])
+        dept = -float(earthquake["depth"])
+        data.append([magnitude, latitude, longitude, date, address, dept])
+
+    df = pd.DataFrame(
+        data, columns=['magnitude', 'latitude', 'longitude', 'date', 'address', 'dept'])
+
+    return df, data
+
+
+def get_magnitude_map(df):
+
+    magnitude_map = folium.Map(
+        location=[df['latitude'].mean(), df['longitude'].mean()], zoom_start=5)
     magnitude_map_data = zip(df['latitude'], df['longitude'], df['magnitude'])
-    plugins.HeatMap(data=magnitude_map_data, min_zoom=7, max_zoom=7).add_to(magnitude_map)
+    plugins.HeatMap(data=magnitude_map_data, min_zoom=7,
+                    max_zoom=7).add_to(magnitude_map)
 
-    ## last 10 earthquake
-    for i in range(0, 10):
-        folium.Marker([df.iloc[i]['latitude'], df.iloc[i]['longitude']], popup=df.iloc[i]['address'] + " " + df.iloc[i]['date']).add_to(magnitude_map)
+    return magnitude_map._repr_html_()
 
-    fig = px.scatter_3d(df, x='longitude', y='latitude', z='dept', color='magnitude', size='magnitude', size_max=18, opacity=0.7)
 
-    fig.update_layout(xaxis=dict(range=[26, 45]), yaxis=dict(range=[36, 42]))
+def get_threed_map(df):
+    fig = px.scatter_3d(df, x='longitude', y='latitude',
+                        z='dept', color='magnitude', size='magnitude')
 
-    return magnitude_map._repr_html_(), fig.to_html(full_html=False)
+    fig.update_layout(scene=dict(xaxis=dict(
+        range=[26, 45]), yaxis=dict(range=[36, 42])))
+
+    return fig.to_html(full_html=False)
+
+
+def get_earthquake(data):
+    return data
+
 
 @app.route("/")
 def index():
-    _magnitude_map, _threed_map = get_maps()
-    return render_template("index.html", magnitude_map=_magnitude_map, threed_map=_threed_map)
+    df, data = fetch_afad_data()
+    _magnitude_map = get_magnitude_map(df=df)
+    _threed_map = get_threed_map(df=df)
+    _earthquakes = get_earthquake(data=data)
+    return render_template("index.html", magnitude_map=_magnitude_map, threed_map=_threed_map, earthquakes=_earthquakes)
+
 
 if __name__ == "__main__":
     app.run()

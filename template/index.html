@@ -3,15 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>earthquake</title>
+    <title>Deprem Bilgi Platformu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="static/js/index.js"></script>
 </head>
 
 <body>
-    <h1>Earthquake</h1>
-    <h2>Map of earthquakes in the last 24 hours</h2>
+    <div class="header">
+        <span class="title">Deprem Bilgi Platformu</span>
+    </div>
 
-    {{ threed_map | safe }}
-    {{ magnitude_map | safe }}
+    <div class="info-main-container">
+        <span class="info-title">Son Deprem Bilgileri</span>
+        <div class="info-container">
+            <div class="info-item-container">
+                <span class="info-item">Son Deprem Zamanı: {{ earthquakes[0][3] }}</span>
+                <span class="info-item">Son Deprem Yeri: {{ earthquakes[0][4] }}</span>
+                <span class="info-item">Son Deprem Büyüklüğü: {{ earthquakes[0][0] }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        {{ threed_map | safe }}
+        {{ magnitude_map | safe }}
+    </div>
+
+    <div class="table-container">
+        <span>Son Depremler Listesi</span>
+        <table class="table">
+            <tr class="table-header">
+                <th>Time</th>
+                <th>Address</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Magnitude</th>
+                <th>Depth</th>
+            </tr>
+
+            <!-- sort by date -->
+            {% set earthquakes = earthquakes | sort(attribute='3', reverse=True) %}
+            {% for earthquake in earthquakes %}
+            <tr class="table-row">
+                <td>{{ earthquake[3] }}</td>
+                <td>{{ earthquake[4] }}</td>
+                <td>{{ earthquake[1] }}</td>
+                <td>{{ earthquake[2] }}</td>
+                <td>{{ earthquake[0] }}</td>
+                <td>{{ earthquake[5] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 
 </html>

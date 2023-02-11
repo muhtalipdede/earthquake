@@ -1,0 +1,134 @@
+:root {
+    --body-color: #fff;
+    --primary-color: #12264e;
+    --secondary-color: #fff;
+    --error-color: #ca1a1a;
+}
+
+body {
+    background-color: var(--body-color);
+    font-family: 'Roboto', sans-serif;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary-color)
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.container span {
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.info-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.info-title {
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.info-item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+.info-item {
+    color: var(--secondary-color);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.table-container span {
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--primary-color);
+    border-collapse: collapse;
+}
+
+.table-header {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.table-header td {
+    padding: 10px;
+}
+
+.table-row {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+.table-row td {
+    padding: 10px;
+}
+
+@media (max-width: 1000px) {
+    .container {
+        flex-direction: column;
+    }
+}

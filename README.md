@@ -18,9 +18,10 @@ Check out the live demo at [earthquake.fly.dev](https://earthquake.fly.dev/).
 ## Installation
 
 1. Clone the repository: `git clone https://github.com/muhtalipdede/earthquake.git`
-2. Install the dependencies: `pip install -r requirements.txt`
-3. Run the development server: `python earthquake.py`
-4. Visit [http://localhost:5000](http://localhost:5000) in your browser to view the app.
+2. `source venv/bin/activate`
+3. Install the dependencies: `pip install -r requirements.txt`
+4. Run the development server: `python earthquake.py`
+5. Visit [http://localhost:5000](http://localhost:5000) in your browser to view the app.
 
 ## Contributing
 

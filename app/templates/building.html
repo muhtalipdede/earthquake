@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Earthquake</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="static/js/index.js"></script>
+</head>
+
+<body>
+    <div class="grid">
+        <div class="grid-item">
+            {{ total_building_map | safe }}
+        </div>
+        <div class="grid-item">
+            {{ before_1980_map | safe }}
+        </div>
+        <div class="grid-item">
+            {{ between_1980_2000_map | safe }}
+        </div>
+        <div class="grid-item">
+            {{ after_2000_map | safe }}
+        </div>
+        <div class="grid-item">
+            {{ unknown_map | safe }}
+        </div>
+    </div>
+</body>
+
+</html>

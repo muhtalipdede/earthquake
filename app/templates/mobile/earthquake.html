@@ -1,0 +1,11 @@
+{% extends "mobile/base.html" %}
+{% block content %}
+<div class="flex flex-row items-center justify-center">
+    <input type="text" id="day-count" placeholder="Day Count"
+        class="w-64 p-4 m-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">
+    <button class="w-64 p-4 m-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700" id="earthquake-submit">
+        Submit
+    </button>
+</div>
+{{ magnitude_map | safe }}
+{% endblock %}

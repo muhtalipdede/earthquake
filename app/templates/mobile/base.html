@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'mobile/head.html' %}
+    {% include 'mobile/scripts.html' %}
+</head>
+<body>
+    {% include 'mobile/loading.html' %}
+    {% include 'mobile/navigation.html' %}
+    {% block content %} {% endblock %}
+    {% include 'mobile/footer.html' %}
+</body>
+</html>

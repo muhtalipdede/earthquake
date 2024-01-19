@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Earthquake</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-    <script src="static/js/earthquake.js"></script>
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block content %}
     <div class="earthquake-container">
         <span id="earthquake-title">Earthquake</span>
         <input type="text" id="day-count" placeholder="Day Count">
@@ -17,6 +8,4 @@
     <div class="container">
         {{ magnitude_map | safe }}
     </div>
-</body>
-
-</html>
+{% endblock %}

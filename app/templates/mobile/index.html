@@ -1,0 +1,14 @@
+<!-- index home page for mobile -->
+{% extends "mobile/base.html" %}
+{% block content %}
+<div class="flex flex-col items-center h-screen">
+    <div class="flex flex-col items-center justify-center mt-8">
+        <img src="/static/images/logo.png" alt="logo" class="w-32 h-32 rounded-full border-2 border-white">
+    </div>
+    <div class="flex flex-col items-center justify-center">
+        <a href="/earthquake" class="w-64 p-4 m-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">Earthquakes</a>
+        <a href="/3d_earthquake" class="w-64 p-4 m-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">3D Earthquakes</a>
+        <!-- <a href="/3d_population" class="w-64 p-4 m-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">3D Population</a> -->
+    </div>
+</div>
+{% endblock %}

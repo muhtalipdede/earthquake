@@ -7,3 +7,5 @@ urllib3==1.26.14
 plotly==5.13.0
 Werkzeug==2.2.2
 waitress==2.0.0
+pydeck==0.7.0
+ipython==7.28.0

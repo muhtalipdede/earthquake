@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Earthquake</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-    <script src="static/js/index.js"></script>
-</head>
-
-<body>
-    <div>
-        {{ surface3d_map | safe }}
-    </div>
-</body>
-
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div>
+    {{ surface3d_map | safe }}
+</div>
+{% endblock %}

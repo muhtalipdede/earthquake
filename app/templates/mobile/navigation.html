@@ -1,0 +1,21 @@
+<!-- navigation component for mobile -->
+<div class="flex flex-row items-center justify-between bg-gray-800 p-4">
+    <a href="/">
+        <img src="/static/images/logo.png" alt="logo" class="w-12 h-12 rounded-full border-2 border-white">
+    </a>
+    <h1 class="text-white text-xl font-bold ml-2">Earthquakes in Turkey</h1>
+    <div>
+        <button id="menu-button" class="text-white text-xl font-bold ml-2">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div id="menu" class="hidden absolute right-0 mt-2 py-2 w-48 bg-gray-800 rounded-md shadow-xl z-20">
+            <a href="/" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Home</a>
+            <a href="/earthquake" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Earthquakes</a>
+            <a href="/3d_earthquake" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">3D Earthquakes</a>
+            <!-- <a href="/3d_population" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">3D Population</a> -->
+            <!-- <a href="/population" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Population</a>
+            <a href="/building" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Building</a>
+            <a href="/about" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">About</a> -->
+        </div>
+    </div>
+</div>

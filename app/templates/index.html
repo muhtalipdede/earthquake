@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Earthquake</title>
-</head>
-
-<body>
-    <h1>Earthquake</h1>
-    <ul>
-        <li><a href="/earthquake">Earthquake</a></li>
-        <li><a href="/population">Population</a></li>
-        <li><a href="/building">Building</a></li>
-    </ul>
-</body>
-
-</html>
+{% extends "base.html" %}
+{% block content %}
+<h1>Earthquake</h1>
+<ul>
+    <li><a href="/earthquake">Earthquake</a></li>
+    <li><a href="/population">Population</a></li>
+    <li><a href="/building">Building</a></li>
+    <li><a href="/about">About</a></li>
+</ul>
+{% endblock %}

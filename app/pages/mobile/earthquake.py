@@ -7,4 +7,4 @@ def earthquake_mobile_page(last_day):
     df = get_earthquake(last_day=last_day)
     fault_line = get_fault_line()
     _magnitude_map = get_magnitude_map(df=df, fault_line=fault_line)
-    return render_template("mobile/earthquake.html", magnitude_map=_magnitude_map)
+    return render_template("mobile/earthquake.html", magnitude_map=_magnitude_map, last_day=last_day)

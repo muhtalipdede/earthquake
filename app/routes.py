@@ -7,6 +7,7 @@ from app.pages.grater_than_5 import grater_than_5_page
 from app.pages.grater_than_6 import grater_than_6_page
 from app.pages.grater_than_7 import grater_than_7_page
 from app.pages.index import index_page
+from app.pages.mobile.about import about_mobile_page
 from app.pages.mobile.earthquake import earthquake_mobile_page
 from app.pages.mobile.index import index_mobile_page
 from app.pages.mobile.three_d import three_d_mobile_page
@@ -28,6 +29,8 @@ def earthquake():
     last_day = request.args.get("last_day", 1, type=int)
     if last_day > 360:
         last_day = 360
+    if last_day < 1:
+        last_day = 1
     if is_mobile(request):
         return earthquake_mobile_page(last_day)
     else:
@@ -43,6 +46,8 @@ def building():
 
 @main_blueprint.route('/about')
 def about():
+    if is_mobile(request):
+        return about_mobile_page()
     return about_page()
 
 @main_blueprint.route('/grater_than_5')
